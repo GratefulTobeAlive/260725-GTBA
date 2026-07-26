@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GTBA Rehearsal Player</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="player-container">
+    <header class="player-header">
+      <h1>GTBA Rehearsal</h1>
+      <p id="current-title">Select a track to start</p>
+      
+      <audio id="audio-player" controls preload="metadata">
+        <source id="audio-source" src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </header>
+
+    <ul class="playlist" id="playlist">
+      <!-- Track items will be populated by JavaScript -->
+    </ul>
+  </div>
+
+  <script>
+    const tracks = [
+      { title: "01 Dire Wolf", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/01%20Dire%20wolf.mp3" },
+      { title: "02 Cassidy", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/02%20Cassidy.mp3" },
+      { title: "03 They Love Each Other", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/03%20They%20Love%20Each%20Other.mp3" },
+      { title: "04-05 Big River - Loser", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/04-05%20Big%20Rier%20-%20Loser.mp3" },
+      { title: "06 Man Smart Woman Smarter", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/06%20Man%20Smart%20woman%20Smarter.mp3" },
+      { title: "07 Brown Eyed Woman", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/07%20Brown%20Eyed%20Woman.mp3" },
+      { title: "08 Tennessee Jed", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/08%20Tennessee%20Jed.mp3" },
+      { title: "10 Friend Of The Devil", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/10%20Friend%20Of%20the%20Devil.mp3" },
+      { title: "11 Scarlet (Take 1)", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/11%20Scarlet.mp3" },
+      { title: "11 Scarlet (Take 2)", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/11%20Scarlet_2.mp3" },
+      { title: "12 Truckin", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/12%20Truckin.mp3" },
+      { title: "13 Bertha Shakedown", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/13%20Bertha%20Shakedown.mp3" },
+      { title: "14 Mississippi Half-Step", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/14%20Mississipi%20Half%20Stip.mp3" },
+      { title: "15 One More Saturday Night", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/15%20Ome%20More%20Sarurday%20Night.mp3" },
+      { title: "16 Music Never Stopped", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/16%20Music%20Never%20Stopped.mp3" },
+      { title: "17 Sugar Magnolia", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/17%20Sugar%20Magnolia.mp3" },
+      { title: "18 Help On The Way", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsa%20260725/18%20Help%20ON%20The%20Way.mp3" }
+    ];
+
+    const audioPlayer = document.getElementById('audio-player');
+    const audioSource = document.getElementById('audio-source');
+    const currentTitle = document.getElementById('current-title');
+    const playlist = document.getElementById('playlist');
+
+    let currentTrackIndex = 0;
+
+    function loadTrack(index) {
+      currentTrackIndex = index;
+      const track = tracks[index];
+      audioSource.src = track.url;
+      audioPlayer.load();
+      currentTitle.textContent = track.title;
+
+      // Update active styling on playlist
+      const items = playlist.querySelectorAll('li');
+      items.forEach((item, i) => {
+        if (i === index) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+
+    function playTrack(index) {
+      loadTrack(index);
+      audioPlayer.play();
+    }
+
+    // Build the playlist elements
+    tracks.forEach((track, index) => {
+      const li = document.createElement('li');
+      li.textContent = track.title;
+      li.addEventListener('click', () => playTrack(index));
+      playlist.appendChild(li);
+    });
+
+    // Auto-play next track when current finishes
+    audioPlayer.addEventListener('ended', () => {
+      if (currentTrackIndex + 1 < tracks.length) {
+        playTrack(currentTrackIndex + 1);
+      }
+    });
+
+    // Load first track on page ready
+    loadTrack(0);
+  </script>
+</body>
+</html>
