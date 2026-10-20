@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GTBA Rehearsal Player (260929)</title>
+  <title>GTBA Rehearsal Player (261018)</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,57 +26,11 @@
 
   <script>
     const tracks = [
-      { title: "01 Music Never Stopped", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20260929/01%20Music%20Never%20Stopped.mp3" },
-      { title: "02 China > Rider", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20260929/02%20China%20Rider.mp3" },
-      { title: "03 Crazy Fingers", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20260929/03%20Crazy%20Fingers.mp3" },
-      { title: "04 Mama Tried", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20260929/04%20Mama%20Tried.mp3" },
-      { title: "05 Althea", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20260929/05%20Althea.mp3" },
-      { title: "06 Terrapin Station", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20260929/06%20Terrapin.mp3" }
-    ];
-
-    const audioPlayer = document.getElementById('audio-player');
-    const audioSource = document.getElementById('audio-source');
-    const currentTitle = document.getElementById('current-title');
-    const playlist = document.getElementById('playlist');
-
-    let currentTrackIndex = 0;
-
-    function loadTrack(index) {
-      currentTrackIndex = index;
-      const track = tracks[index];
-      audioSource.src = track.url;
-      audioPlayer.load();
-      currentTitle.textContent = track.title;
-
-      const items = playlist.querySelectorAll('li');
-      items.forEach((item, i) => {
-        if (i === index) {
-          item.classList.add('active');
-        } else {
-          item.classList.remove('active');
-        }
-      });
-    }
-
-    function playTrack(index) {
-      loadTrack(index);
-      audioPlayer.play();
-    }
-
-    tracks.forEach((track, index) => {
-      const li = document.createElement('li');
-      li.textContent = track.title;
-      li.addEventListener('click', () => playTrack(index));
-      playlist.appendChild(li);
-    });
-
-    audioPlayer.addEventListener('ended', () => {
-      if (currentTrackIndex + 1 < tracks.length) {
-        playTrack(currentTrackIndex + 1);
-      }
-    });
-
-    loadTrack(0);
-  </script>
-</body>
-</html>
+      { title: "01 Music Never Stopped", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20261018/01%20Music%20Never%20Stopped.mp3" },
+      { title: "02 China > Rider", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20261018/02%20China%20Rider.mp3" },
+      { title: "03 Friend of The Devil", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20261018/03%20Friend%20of%20The%20Devil.mp3" },
+      { title: "04 Beat It On Down The Line", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20261018/04%20Beat%20It%20On%20Down%20The%20line.mp3" },
+      { title: "04 Beat It Vox", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20261018/04%20Beat%20It%20Vox.mp3" },
+      { title: "05 Crazy Fingers (Vx)", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20261018/05%20Crazy%20Fingers_Vx.mp3" },
+      { title: "05 Crazy Fingers", url: "https://f001.backblazeb2.com/file/Flavorlab-Delivery/gfx/GTBA/GTBA%20Rehearsal%20261018/05%20Crazy%20Fingers.mp3" },
+      { title: "06 El Paso", url: "
